@@ -9,7 +9,7 @@
 
 Get-Module ActiveDirectory
 
-$objUser = Import-Csv -Path C:\data\GUSRAudit.csv
+$objUser = Import-Csv -Path C:\data\UserAudit.csv
 
 $objArray = @()
 
@@ -35,4 +35,4 @@ Foreach ($x in $objUser)
             }
         }
 
-$ObjArray | Export-Csv "C:\DATA\newgusr.csv" -NoTypeInformation
+$ObjArray | Export-Csv "C:\DATA\UserAudit.csv" -NoTypeInformation

@@ -1,0 +1,134 @@
+﻿<#
+ .SYNOPSIS
+
+    Queries Servers for their password and lockout policy
+
+ .DESCRIPTION
+    This script will run against all enabled computer objects in Active Directory and query Password and Lockout Policy
+
+.INPUTS
+    <Inputs if any, otherwise none>
+
+.OUTPUTS
+    
+    <Outputs if any, otherwise none>
+.NOTES
+    Version: 1.0
+    Author: Binary2Dec
+    Creation Date: 9-19-2016
+    Purpose/Change
+.EXAMPLE
+
+#>
+
+
+
+Function Get-PasswordPolicy { #Begin Function
+[CmdletBinding()]
+Param (
+    [Parameter(Mandatory=$False,Position=1)]
+    [string] $ComputerName
+        )    
+
+
+
+Begin {
+
+#Verify ActiveDirectory Module is loaded into shell
+If (!(Get-Module -Name "ActiveDirectory")) { #start if statement
+                    Import-Module ActiveDirectory
+
+                       } #End If statement
+
+#$ErrorActionPreference is normally set to "Continue", this will set the variable to SilentlyContinue
+$ErrorActionPreference = "SilentlyContinue"
+
+
+
+
+}
+
+Process {
+
+$Array = @()
+
+$Record = @{ #begin hash
+
+"Hostname" = ""
+"Minimum Password Age" = ""
+"Maximum Password Age" = ""
+"Minimum Password Length" = ""
+"Password History Length" = ""
+"Password Lockout Threshold" = ""
+"Password Lockout Duration" = ""
+"Password Lockout Observation" = ""
+
+}#end hash
+
+
+$ServerList = Get-ADComputer -Filter * -Properties * | Where-Object {$_.Enabled -eq $true} | Select-Object Name
+
+ForEach ($x in $ServerList) { #Begin Foreach Loop
+
+    Try {#Begin Try
+            #Command variable leveraging a here string to grab net accounts
+            
+            $Invoke = Invoke-Command -ComputerName $x.name {net accounts}
+            
+
+            #Populate Net Account variables while inside foreach loop
+
+            $ServerName = $x.name
+            $MinPassAge = ($Invoke[1]).Substring(54) #This is the length of the minumum password age in days
+            $MaximumPassAge = ($Invoke[2]).Substring(54) #This is the length of the maximum password age in days
+            $MinPassLength = ($Invoke[3]).Substring(54) #This is the length of the minimum password length in days
+            $PassHistory = ($Invoke[4]).Substring(54) #This is the length of the password history maintained
+            $PassLockThresh = ($Invoke[5]).Substring(54) #This is the length of the lockout threshold
+            $PassLockDur = ($Invoke[6]).Substring(54) #This is the length of the lockout duration in minutes
+            $PassLockObs = ($Invoke[7]).Substring(54) #This is the length of the lockout observation windows in minutes
+
+            #Poputlate Hash Table
+
+            $Record."Hostname" = $ServerName
+            $Record."Minimum Password Age" = $MinPassAge
+            $Record."Maximum Password Age" = $MaximumPassAge
+            $Record."Minimum  Password Length" = $MinPassLength
+            $Record."Password History Length" = $PassHistory
+            $Record."Password Lockout Threshold" = $PassLockThresh
+            $Record."Password Lockout Duration" = $PassLockDur
+            $Record."Password Lockout Observation" = $PassLockObs
+
+       
+            Write-Host $Record."Minimum Password Age"
+
+            #Create Object
+            $ObjRecord = New-Object PSObject -Property $Record
+
+            #Populate Array
+            $Array += $ObjRecord
+            Write-Host -ForegroundColor "Green"  $Array
+
+
+       } #End Try
+
+    Catch {}
+
+
+} #End ForEach Loop
+
+
+}
+
+End {}
+
+
+
+
+
+
+
+
+
+} # End Function
+
+Get-PasswordPolicy

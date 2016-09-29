@@ -1,4 +1,21 @@
-﻿<#
+﻿Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @binary2dec
+ Unwatch 1
+  Star 0
+  Fork 0 binary2dec/Powershell
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathPowershell/ActiveDirectory/PasswordPolicyRemote.ps1
+f6f8316  4 minutes ago
+@jmanzzullo jmanzzullo added If/else statements
+1 contributor
+RawBlameHistory     
+144 lines (90 sloc)  4.04 KB
+<#
  .SYNOPSIS
     Queries Servers for their password and lockout policy
  .DESCRIPTION
@@ -118,7 +135,11 @@ ForEach ($x in $ServerList) { #Begin Foreach Loop
 
        } #End Try
 
-    Catch {}
+    Catch   {#Start Catch
+    
+            $Status = "Inaccessible"
+    
+            }#End Catch
 
 
 } #End ForEach Loop

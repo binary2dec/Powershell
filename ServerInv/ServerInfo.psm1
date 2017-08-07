@@ -44,7 +44,7 @@ Foreach ($computer in $computername) {
                'Memory Clock Speed' = $memory.ConfiguredClockSpeed
                'Memory Size' = $memory.capacity
                }
-        $obj = New-Object -TypeName PSObject -Property $props
+        $obj = New-Object -TypeName PSObject -Property $props 
         Write-Output $obj       
 
 }#foreach

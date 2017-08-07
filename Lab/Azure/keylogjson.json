@@ -1,0 +1,80 @@
+{
+    "authorization": {
+        "action": "Microsoft.KeyVault/vaults/write",
+        "scope": "/subscriptions/ea57f29b-a52c-4cf3-a2f5-b7217a774667/resourcegroups/manzzullo-central-us/providers/Microsoft.KeyVault/vaults/ManzzulloTest"
+    },
+    "caller": "james.manzzullo@sap.com",
+    "channels": "Operation",
+    "claims": {
+        "aud": "https://management.core.windows.net/",
+        "iss": "https://sts.windows.net/42f7676c-f455-423c-82f6-dc2d99791af7/",
+        "iat": "1501889551",
+        "nbf": "1501889551",
+        "exp": "1501893451",
+        "http://schemas.microsoft.com/claims/authnclassreference": "1",
+        "aio": "Y2FgYKhe/ZNH+Wf47huTp+uniHbc/Nr6r1f6CZ/U7DkM07LDFCUB",
+        "http://schemas.microsoft.com/claims/authnmethodsreferences": "pwd",
+        "appid": "c44b4083-3bb0-49c1-b47d-974e53cbdf3c",
+        "appidacr": "2",
+        "e_exp": "262800",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname": "Manzzullo",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname": "James",
+        "groups": "ef9b2186-a337-430d-bc50-b6c3bd929865,cbfc22d5-5262-4798-b84b-be2960386660",
+        "ipaddr": "199.66.69.102",
+        "name": "Manzzullo, James",
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "6a68abae-e831-4777-a03b-bf31ba8fa3b8",
+        "onprem_sid": "S-1-5-21-74642-3284969411-2123768488-692420",
+        "platf": "3",
+        "puid": "10037FFE9440791D",
+        "http://schemas.microsoft.com/identity/claims/scope": "user_impersonation",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "JtryL1_bBgKPrmcuQXWQL0CM-ZsGBDgszyy-DZVI6ps",
+        "http://schemas.microsoft.com/identity/claims/tenantid": "42f7676c-f455-423c-82f6-dc2d99791af7",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name": "james.manzzullo@sap.com",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn": "james.manzzullo@sap.com",
+        "ver": "1.0"
+    },
+    "correlationId": "96a4b99c-1680-46a0-ae65-f73d9ab58463",
+    "description": "",
+    "eventDataId": "fb40f795-5d66-469b-92df-5f362c20959a",
+    "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "End request"
+    },
+    "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+    },
+    "eventTimestamp": "2017-08-04T23:49:50.3198298Z",
+    "id": "/subscriptions/ea57f29b-a52c-4cf3-a2f5-b7217a774667/resourcegroups/manzzullo-central-us/providers/Microsoft.KeyVault/vaults/ManzzulloTest/events/fb40f795-5d66-469b-92df-5f362c20959a/ticks/636374873903198298",
+    "level": "Informational",
+    "operationId": "f6841770-026d-45ad-bd48-95bfb5edaaea",
+    "operationName": {
+        "value": "Microsoft.KeyVault/vaults/write",
+        "localizedValue": "Microsoft.KeyVault/vaults/write"
+    },
+    "resourceGroupName": "manzzullo-central-us",
+    "resourceProviderName": {
+        "value": "Microsoft.KeyVault",
+        "localizedValue": "Microsoft.KeyVault"
+    },
+    "resourceType": {
+        "value": "Microsoft.KeyVault/vaults",
+        "localizedValue": "Microsoft.KeyVault/vaults"
+    },
+    "resourceId": "/subscriptions/ea57f29b-a52c-4cf3-a2f5-b7217a774667/resourcegroups/manzzullo-central-us/providers/Microsoft.KeyVault/vaults/ManzzulloTest",
+    "status": {
+        "value": "Succeeded",
+        "localizedValue": "Succeeded"
+    },
+    "subStatus": {
+        "value": "",
+        "localizedValue": ""
+    },
+    "submissionTimestamp": "2017-08-04T23:50:10.699779Z",
+    "subscriptionId": "ea57f29b-a52c-4cf3-a2f5-b7217a774667",
+    "properties": {
+        "statusCode": "OK",
+        "serviceRequestId": null
+    },
+    "relatedEvents": []
+}

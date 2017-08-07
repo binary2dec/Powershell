@@ -1,12 +1,20 @@
 Function Set-TServiceLogon {
     [CmdletBinding()]
     Param(
-   [Parameter(ValueFromPipeline=$True,ValueFromPipelineByPropertyName=$True,Mandatory=$True)]
+    [Parameter(ValueFromPipeline=$true,
+               ValueFromPipelineByPropertyName=$true,
+               Mandatory=$true)]
+    [Alias('CN','MachineName','Name')]
     [string[]]$ComputerName,
+    [Parameter(ValueFromPipelineByPropertyName=$true,
+               Mandatory=$true)]
     [string]$NewPassword,
     [string]$NewUserLogon,
     [string]$Errorlogpath,
+    [ValidateSet('Wsman','Dcom')]
     [string]$Protocol = "wsman",
+    [Parameter(ValueFromPipelineByPropertyName=$true,
+               Mandatory=$true)]
     [string]$ServiceName,
     [switch]$ProtocolFallback
     )
@@ -45,19 +53,30 @@ Process{
 
     $SetService = Invoke-CimMethod -CimSession $session -MethodName Change -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName' " -Arguments $args -ErrorAction SilentlyContinue -Verbose
 
-#Logging
-    $log = @{'ComputerName' = $computer
-        'ReturnValue' = $($SetService.ReturnValue) }
+    $ReturnCode = $($SetService.ReturnValue)
 
-    $log | ConvertTo-Json | Add-Content -Path "C:\data\log.json"
+#Data Output
+   
 
+    $props = @{'ComputerName' = $computer
+               'ReturnCode'   = $ReturnCode
+               'NewUserLogon Name' = $NewUserLogon
+               'Service Name' = $ServiceName
+              }
+
+    $obj = New-Object -TypeName PSObject -Property $props
+    $obj | ConvertTo-Json | Add-Content -Path "C:\data\log.json"
+    
+    Write-Output $obj 
+              
 #Remove Session
     $session | Remove-CimSession
+
+
 
     } #end foreach
         } #end 
             } #end Process
-
-
+         
 #Set-TServiceLogon -ComputerName "ms01" -ServiceName "spooler" -NewUserLogon "Local Service" 
 
